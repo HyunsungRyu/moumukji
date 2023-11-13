@@ -9,7 +9,19 @@ df = pd.read_csv("removed_rice.csv")
 df = pd.read_csv("removed_soup.csv")
 
 selected_columns = df[
-    ["RecipeId","Name","식품대분류","식품상세분류","1회제공량(g)","Calories","carbohydrate","protein","fat","sugar","Sodium"]
+    [
+        "RecipeId",
+        "Name",
+        "식품대분류",
+        "식품상세분류",
+        "1회제공량(g)",
+        "Calories",
+        "carbohydrate",
+        "protein",
+        "fat",
+        "sugar",
+        "Sodium",
+    ]
 ]
 # Pandas DataFrame을 NumPy 배열로 변환
 main_dish_array = selected_columns.to_numpy()
