@@ -186,4 +186,4 @@ if closest_meal_combination is not None:
     print(final_meal.iloc[nearest_neighbor_index, :])
     print("-------------------------------")
 else:
-    print("No valid combination found within the specified constraints.")
+    print("다시 시도")
