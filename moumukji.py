@@ -126,6 +126,7 @@ for i in range(len(filtered_random_meal)):
     for nutrient in filtered_meal_nutrients:
         filtered_meal_nutrients[nutrient].append(meal_nutrient_sum[nutrient])
 
+# 모델 개발
 final_meal = pd.DataFrame()
 final_meal["RecipeID"] = filtered_random_meal
 for nutrient in filtered_meal_nutrients:
