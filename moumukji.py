@@ -55,7 +55,7 @@ data_set_list = [
     rice_dataset,
     kimchi_dataset,
     soup_dataset,
-] # 메인반찬, 사이드 반찬, 밥, 김치 , 국
+]  # 메인반찬, 사이드 반찬, 밥, 김치 , 국
 
 for i in range(len(random_meal)):
     meal_nutrient_sum = {nutrient: 0 for nutrient in random_meal_nutrients}
@@ -182,9 +182,6 @@ if closest_meal_combination is not None:
         print(f"Meal {i + 1}:")
         print(meal)
 
-    print("\nRecommended Meal (Closest Neighbor):")
-    print(final_meal.iloc[nearest_neighbor_index, :])
-    print("-------------------------------")
+
 else:
     print("다시 시도")
-
