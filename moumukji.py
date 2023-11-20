@@ -55,7 +55,7 @@ data_set_list = [
     rice_dataset,
     kimchi_dataset,
     soup_dataset,
-]
+] # 메인반찬, 사이드 반찬, 밥, 김치 , 국
 
 for i in range(len(random_meal)):
     meal_nutrient_sum = {nutrient: 0 for nutrient in random_meal_nutrients}
@@ -75,7 +75,7 @@ max_daily_Carbohydrate = 325
 max_daily_Protein = 200
 max_daily_fat = 100
 max_daily_Sugar = 40
-max_daily_Sodium = 3000
+max_daily_Sodium = 2400
 max_list = [
     max_daily_Calories,
     max_daily_Carbohydrate,
@@ -87,10 +87,10 @@ max_list = [
 
 max_one_meal_Calories = 1500
 max_one_meal_Carbohydrate = 200
-max_one_meal_Protein = 150
+max_one_meal_Protein = 120
 max_one_meal_fat = 60
 max_one_meal_Sugar = 30
-max_one_meal_Sodium = 2000
+max_one_meal_Sodium = 1600
 max_one_meal_list = [
     max_one_meal_Calories,
     max_one_meal_Carbohydrate,
@@ -187,3 +187,4 @@ if closest_meal_combination is not None:
     print("-------------------------------")
 else:
     print("다시 시도")
+
