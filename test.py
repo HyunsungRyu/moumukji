@@ -14,6 +14,7 @@ kimchi = pd.read_csv("removed_kimchi.csv")
 rice = pd.read_csv("removed_rice.csv")
 soup = pd.read_csv("removed_soup.csv")
 
+MSRKS = [main_dish, side_dish,rice, kimchi, soup]
 columns = [
     "RecipeID",
     "Name",
@@ -156,4 +157,30 @@ final_data = scaler.fit_transform(final_meal.iloc[:, 1:].to_numpy())
 neigh = NearestNeighbors(metric="euclidean", algorithm="brute")
 neigh.fit(final_data)
 
-print(day_meal)
+for meal_combination in day_meal:
+    selected_meals_data = np.vstack([meal.iloc[1:].values for meal in meal_combination])
+    selected_meals_data_scaled = scaler.transform(selected_meals_data)
+    nearest_neighbors_indices = neigh.kneighbors(
+        selected_meals_data_scaled, n_neighbors=1, return_distance=False
+    )
+    nearest_neighbor_index = nearest_neighbors_indices[0][0]
+    nearest_neighbor_nutrients = final_meal.iloc[nearest_neighbor_index, 1:]
+    selected_meals_nutrients_sum = {nutrient: 0 for nutrient in random_meal_nutrients}
+    for meal in meal_combination:
+        for nutrient in selected_meals_nutrients_sum:
+            selected_meals_nutrients_sum[nutrient] += meal[nutrient]
+
+    distance = np.linalg.norm(
+        list(selected_meals_nutrients_sum.values()) - nearest_neighbor_nutrients
+    )
+
+    if distance < closest_distance and all(nearest_neighbor_nutrients <= max_list):
+        closest_distance = distance
+        closest_meal_combination = meal_combination
+
+MSRKS = [main_dish, side_dish,rice, kimchi, soup]
+test_list = []
+for z in range(5): # 0 1 2 3 4
+    for d in range(len(final_meal)):
+        print(final_meal.iloc[:, 0][d][z]) # (0~11),(0~4)
+        
