@@ -14,6 +14,7 @@ kimchi = pd.read_csv("removed_kimchi.csv")
 rice = pd.read_csv("removed_rice.csv")
 soup = pd.read_csv("removed_soup.csv")
 
+MSRKS = [main_dish, side_dish,rice, kimchi, soup]
 columns = [
     "RecipeID",
     "Name",
@@ -55,7 +56,7 @@ data_set_list = [
     rice_dataset,
     kimchi_dataset,
     soup_dataset,
-]  # 메인반찬, 사이드 반찬, 밥, 김치 , 국
+] # 메인반찬, 사이드 반찬, 밥, 김치 , 국
 
 for i in range(len(random_meal)):
     meal_nutrient_sum = {nutrient: 0 for nutrient in random_meal_nutrients}
@@ -85,7 +86,7 @@ max_list = [
     max_daily_Sodium,
 ]
 
-max_one_meal_Calories = 1500
+max_one_meal_Calories = 1500 # 걸러짐 오류
 max_one_meal_Carbohydrate = 200
 max_one_meal_Protein = 120
 max_one_meal_fat = 60
@@ -177,12 +178,29 @@ for meal_combination in day_meal:
         closest_distance = distance
         closest_meal_combination = meal_combination
 
+ID_list = []
+for i in range(3):
+    for j in range(5):
+        ID_list.append(closest_meal_combination[i][0][j])
+        
+        
+name_list = []
+tem = 0
+k = 0
+for z in range(3):
+    for num in range(5):
+        for j in range(len(MSRKS[num])):
+            if (MSRKS[num].iloc[j].loc["RecipeID"] == ID_list[k]): # 메인 사이드 밥 김치 국
+                name_list.append(MSRKS[num].iloc[j].loc['Name'])
+                k +=1
+                break
 if closest_meal_combination is not None:
     print("\nSelected Meals:")
     for i, meal in enumerate(closest_meal_combination):
         print(f"Meal {i + 1}:")
+        print('[ | ',end = "")
+        for  j in range(5):
+            print(name_list[tem], end = " | ")
+            tem+=1
+        print(']')
         print(meal)
-
-
-else:
-    print("다시 시도")
